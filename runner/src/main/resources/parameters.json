@@ -8,6 +8,13 @@
       },
       "serverParameters": [
         {
+          "BATCH_PROCESS_NUMBER": "1",
+          "THREAD_POOL_SIZE": "2",
+          "SERVER_TYPE": "com.shark.iopattern.touchstone.server.shark.QueuedAsyncServer",
+          "READ_THREAD_POOL_SIZE": "1",
+          "WRITE_THREAD_POOL_SIZE": "0"
+        },
+        {
           "IO_THREAD_POOL_SIZE": "2",
           "THREAD_POOL_SIZE": "4",
           "SERVER_TYPE": "com.shark.iopattern.touchstone.server.netty.NettyServer"

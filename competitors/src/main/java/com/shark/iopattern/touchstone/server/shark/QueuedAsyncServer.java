@@ -13,7 +13,7 @@ import com.shark.iopattern.touchstone.share.Constants;
 import com.shark.iopattern.touchstone.share.ProtocolSPI;
 
 
-final public class QueuedAsyncServer extends AbstractServer {
+final public class QueuedAsyncServer extends AbstractServerWithWriter {
 
 	private volatile boolean started_ = false;
 

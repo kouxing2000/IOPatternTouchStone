@@ -31,13 +31,11 @@ import com.shark.iopattern.touchstone.share.ProtocolSPI;
  * @author weili1
  * 
  */
-public class AbstractServer implements ServerIF {
+public abstract class AbstractServer implements ServerIF {
 	
 	volatile boolean started_ = false;
 
 	final Logger logger = LoggerFactory.getLogger(getClass());
-	
-	BlockingQueue<BufferWriteChannelHolder> readableChannelQueue;
 
 	private ServerSocketChannel serverChannel;
 
@@ -49,32 +47,12 @@ public class AbstractServer implements ServerIF {
 	
 	Selector selector ;
 
-	boolean synchronousWrite = false;
-	
-	WriteThread[] writeThreads_ = null;
-	
 	List<Thread> runningThreads = new ArrayList<Thread>();
 	
-	LinkedBlockingQueue<BufferWriteChannelHolder> writeableChannelQueue;
-	
+
 	public AbstractServer() {
 		
-		if (ServerConstants.WRITE_THREAD_POOL_SIZE <= 0) {
-			synchronousWrite = true;
 
-		} else {
-			synchronousWrite = false;
-
-			writeableChannelQueue = new LinkedBlockingQueue<BufferWriteChannelHolder>(
-					100);
-
-			writeThreads_ = new WriteThread[ServerConstants.WRITE_THREAD_POOL_SIZE];
-			
-			for (int j = 0; j < writeThreads_.length; j++) {
-				writeThreads_[j] = new WriteThread(getClass().getSimpleName() + "-WriteThread[" + j + "]");
-			}
-
-		}
 	}
 	
 	protected ChannelHolder createChannelHolder(SocketChannel channel,
@@ -106,8 +84,6 @@ public class AbstractServer implements ServerIF {
 
 		// register the ServerSocketChannel with the Selector
 		serverChannel.register(selector, SelectionKey.OP_ACCEPT);
-
-		readableChannelQueue = new LinkedBlockingQueue<BufferWriteChannelHolder>(100);
 
 		bossThread = new Thread() {
 			@Override
@@ -155,44 +131,8 @@ public class AbstractServer implements ServerIF {
 		};
 
 		bossThread.start();
-		
-		if (!synchronousWrite){
-			// Start the write.
-			for (int k = 0; k < writeThreads_.length; k++) {
-				writeThreads_[k].start();
-				runningThreads.add(writeThreads_[k]);
-			}
-		}
-	}
-	
-	private class WriteThread extends Thread {
 
-		WriteThread(String name) {
-			super(name);
-		}
 
-		public void run() {
-			try {
-
-				logger.info(getName() + " started.");
-
-				do {
-					BufferWriteChannelHolder channelHolder = writeableChannelQueue.take();
-					try {
-						channelHolder.flush();
-					} catch (IOException e) {
-						logger.warn("", e);
-						channelHolder.close();
-						continue;
-					}
-				} while (started_);
-
-			} catch (Exception ex) {
-				logger.error("", ex);
-			} finally{
-				logger.info(this.getName() + ": stoped.");
-			}
-		}
 	}
 
 	@Override
@@ -261,9 +201,10 @@ public class AbstractServer implements ServerIF {
 		interestOps &= ~SelectionKey.OP_READ;
 		key.interestOps(interestOps);
 
-		readableChannelQueue.put(proc);
-
+		registerReadableChannel(proc);
 	}
+
+	protected abstract void registerReadableChannel(BufferWriteChannelHolder proc) throws Exception;
 
 	// ----------------------------------------------------------
 

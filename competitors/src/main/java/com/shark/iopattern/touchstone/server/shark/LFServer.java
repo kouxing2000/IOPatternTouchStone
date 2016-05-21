@@ -8,7 +8,7 @@ import com.shark.iopattern.touchstone.share.Constants;
 import com.shark.iopattern.touchstone.share.ProtocolSPI;
 
 
-public final class LFServer extends AbstractServer{
+public final class LFServer extends AbstractServerWithWriter{
 
 	private LFThread[] threads_ = null;
 
