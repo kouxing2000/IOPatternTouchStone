@@ -45,13 +45,13 @@ public final class ClientConstants {
     /**
      * The following are client performance test parameters
      */
-	public static int WARM_UP_NUM_MESSAGES = 10;
+	public static int WARM_UP_NUM_MESSAGES = 5000;
 
 	public static int NUM_MESSAGES = 10000;
 
 	public static int READ_BUFFER_SIZE = (64 * 1024);
 
-	public static int MAX_PENDING_REQUESTS_PER_CONNECTION = 10;
+	public static int MAX_PENDING_REQUESTS_PER_CONNECTION = 1000;
 
 	public static int CONNECTION_NUM = 5;
 

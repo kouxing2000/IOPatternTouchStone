@@ -3,15 +3,10 @@
  */
 package com.shark.iopattern.touchstone.client;
 
-import com.shark.iopattern.touchstone.client.PerfClientServlet;
 import com.shark.iopattern.touchstone.share.ProtocolSPI;
-import com.shark.iopattern.touchstone.variable_length.VLClientSPI;
-import com.shark.iopattern.touchstone.variable_length.VLProtocol;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-
-import com.shark.iopattern.touchstone.client.ClientConstants;
 
 
 /**

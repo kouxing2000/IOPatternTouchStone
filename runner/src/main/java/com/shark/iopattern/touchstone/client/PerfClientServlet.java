@@ -177,9 +177,9 @@ public class PerfClientServlet extends HessianServlet implements Service {
 			bossThread.interrupt();
 		}
 
-		for (int i = 0; i < 2; i++) {
+		for (int i = 0; i < 5; i++) {
 			System.gc();
-			Thread.sleep(1000);
+			Thread.sleep(500);
 		}
 
 	}

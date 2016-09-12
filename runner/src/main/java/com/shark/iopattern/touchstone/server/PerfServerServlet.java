@@ -76,14 +76,15 @@ public class PerfServerServlet extends HessianServlet implements Service {
     @Override
     public void stop() throws Exception {
 
-        logger.info("Sop...");
+        logger.info("Stop...");
 
         running = false;
 
         server.stop();
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 5; i++) {
             System.gc();
+            Thread.sleep(250);
         }
 
     }

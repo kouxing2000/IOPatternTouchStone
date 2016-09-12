@@ -42,13 +42,13 @@ public final class ServerConstants {
 
     public static int WRITE_BUFFER_SIZE = (64 * 2048);
 
-    public static int THREAD_POOL_SIZE = 6;
+    public static int THREAD_POOL_SIZE = 2;
 
     // QAS
     public static int READ_THREAD_POOL_SIZE = 1;
 
     // QAS, LFS
-    public static int WRITE_THREAD_POOL_SIZE = 1;
+    public static int WRITE_THREAD_POOL_SIZE = 0;
 
     // QAS
     public static int MAX_READ_TIMES_PER_THREAD_CHANNEL = 3;

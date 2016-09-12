@@ -1,0 +1,60 @@
+{
+  "parameterDataPairs": [
+    {
+      "name": "common",
+      "initServerParameters": {
+        "ProtocolSPI": "com.shark.iopattern.touchstone.variable_length.VLProtocol",
+        "ServerSPI": "com.shark.iopattern.touchstone.variable_length.VLServerSPI2"
+      },
+      "serverParameters": [
+        {
+          "READ_THREAD_POOL_SIZE": "2",
+          "THREAD_POOL_SIZE": "2",
+          "SERVER_TYPE": "com.shark.iopattern.touchstone.server.shark.QueuedAsyncServer"
+        },
+        {
+          "IO_THREAD_POOL_SIZE": "2",
+          "THREAD_POOL_SIZE": "2",
+          "SERVER_TYPE": "com.shark.iopattern.touchstone.server.netty.NettyServer"
+        },
+        {
+          "IO_THREAD_POOL_SIZE": "4",
+          "THREAD_POOL_SIZE": "0",
+          "SERVER_TYPE": "com.shark.iopattern.touchstone.server.netty.NettyServer"
+        },
+        {
+          "READ_THREAD_POOL_SIZE": "2",
+          "THREAD_POOL_SIZE": "2",
+          "SERVER_TYPE": "com.shark.iopattern.touchstone.server.shark.DisruptorServer"
+        },
+        {
+          "READ_THREAD_POOL_SIZE": "0",
+          "THREAD_POOL_SIZE": "4",
+          "SERVER_TYPE": "com.shark.iopattern.touchstone.server.shark.DisruptorServer"
+        }
+      ],
+      "initClientParameters": {
+        "ProtocolSPI": "com.shark.iopattern.touchstone.variable_length.VLProtocol",
+        "ClientSPI": "com.shark.iopattern.touchstone.variable_length.VLClientSPI",
+        "WARM_UP_NUM_MESSAGES" : "2000",
+        "MAX_PENDING_REQUESTS_PER_CONNECTION" : "100"
+      },
+      "clientParameters": [
+        {
+          "NUM_MESSAGES": "10000",
+          "CONNECTION_NUM": "1"
+        },
+        {
+          "NUM_MESSAGES": "20000",
+          "CONNECTION_NUM": "2"
+        },
+        {
+          "NUM_MESSAGES": "30000",
+          "CONNECTION_NUM": "3"
+        }
+      ]
+    }
+  ],
+  "serverURL": "http://localhost:1234/",
+  "clientURL": "http://localhost:2345/"
+}

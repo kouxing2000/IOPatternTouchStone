@@ -55,8 +55,8 @@ public class GraphHelper {
 		for (int i = 0; i < reportMatrix.length; i++) {
 			for (int j = 0; j < reportMatrix[i].length; j++) {
 				defaultcategorydataset.addValue(vg.get(reportMatrix[i][j]),
-						pd.serverParameters.get(i).toString(),
-						pd.clientParameters.get(j).toString());
+						pd.serverParameters.get(i).toString().replace("com.shark.iopattern.touchstone", ""),
+						pd.clientParameters.get(j).toString().replace("com.shark.iopattern.touchstone", ""));
 			}
 		}
 

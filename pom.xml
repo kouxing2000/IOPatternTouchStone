@@ -10,7 +10,7 @@
 
 	<modules>      
         <module>platform</module>
-        <module>competitors</module>
+        <module>sample</module>
         <module>runner</module>
     </modules>
 </project>
